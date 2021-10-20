@@ -5,12 +5,28 @@ const promptUser = () => {
       {
         type: 'input',
         name: 'name',
-        message: 'what is your name?'
+        message: 'what is your name?',
+        validate: nameInput => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log('Please enter your name!');
+            return false;
+          }
+        }
       },
       {
         type: 'input',
         name: 'github',
-        message: 'Enter your GitHub Username'
+        message: 'Enter your GitHub Username',
+        validate: githubInput => {
+          if (githubInput) {
+            return true;
+          } else {
+            console.log('Please enter your github username!');
+            return false;
+          }
+        }
       },
       {
         type: 'input',
@@ -34,12 +50,28 @@ const promptProject = portfolioData => {
       {
         type: 'input',
         name: 'name',
-        message: 'What is the name of your project?'
+        message: 'What is the name of your project?',
+        validate: projNameInput => {
+          if (projNameInput) {
+            return true;
+          } else {
+            console.log('Please enter a project name!');
+            return false;
+          }
+        }
       },
       {
         type: 'input',
         name: 'description',
-        messge: 'Provide a description of the project (Required)'
+        messge: 'Provide a description of the project (Required)',
+        validate: projDescInput => {
+          if (projDescInput) {
+            return true;
+          } else {
+            console.log('Please enter a project description.');
+            return false;
+          }
+        }
       },
       {
         type: 'checkbox',
@@ -50,7 +82,15 @@ const promptProject = portfolioData => {
       {
         type: 'input',
         name: 'link',
-        message: 'Enter the GitHub link to your project. (Required)'
+        message: 'Enter the GitHub link to your project. (Required)',
+        validate: githubLinkInput => {
+          if (githubLinkInput) {
+            return true;
+          } else {
+            console.log('Please enter the link to your project on github.');
+            return false;
+          }
+        }
       },
       {
         type: 'confirm',
@@ -75,7 +115,15 @@ const promptProject = portfolioData => {
       });
     
 };
-// const fs = require('fs');
+ 
+promptUser()
+  .then(promptProject)
+  .then(portfolioData => {
+    console.log(portfolioData);
+  });
+
+
+  // const fs = require('fs');
 // const generatePage = require('./src/page-template.js'); // variable name here can be whatever but the relative path must be precise
 // const pageHTML = generatePage(name, github);
 
@@ -84,9 +132,3 @@ const promptProject = portfolioData => {
 // 	if (err) throw err;
 // 	console.log('Portfolio complete! Check out index.html to see the output!');
 // });
- 
-promptUser()
-  .then(promptProject)
-  .then(portfolioData => {
-    console.log(portfolioData);
-  });
