@@ -12,20 +12,21 @@ const generateAbout = aboutText => {
   `;
 };
 
+// create the projects section
 const generateProjects = projectsArr => {
   return `
     <section class="my-3" id="portfolio">
       <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
       <div class="flex-row justify-space-between">
       ${projectsArr
-        .filter(({ feature }) => feature) // is projectsArr.feature true?
+        .filter(({ feature }) => feature)
         .map(({ name, description, languages, link }) => {
           return `
           <div class="col-12 mb-2 bg-dark text-light p-3">
             <h3 class="portfolio-item-title text-light">${name}</h3>
             <h5 class="portfolio-languages">
               Built With:
-              ${languages.join(', ')}
+              ${languages.map(language => language).join(',')}
             </h5>
             <p>${description}</p>
             <a href="${link}" class="btn"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
@@ -55,16 +56,14 @@ const generateProjects = projectsArr => {
   `;
 };
 
+// export function to generate entire page
 module.exports = templateData => {
-  console.log(templateData);
-  // destructure projects and about data from templateData based on their property key names
-  // this will create three variables based on data in templateData
   // destructure page data by section
   const { projects, about, ...header } = templateData;
+
   return `
   <!DOCTYPE html>
   <html lang="en">
-
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,7 +73,7 @@ module.exports = templateData => {
     <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
-
+  
   <body>
     <header>
       <div class="container flex-row justify-space-between align-center py-3">
